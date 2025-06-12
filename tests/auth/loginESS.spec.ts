@@ -3,7 +3,7 @@ import LoginPage from "../../pages/LoginPage";
 import { users } from "../../data/users";
 import { messages } from "../../data/messages";
 
-test.describe("Login - Admin", () => {
+test.describe("Login - ESS", () => {
   let loginPage: LoginPage;
 
   test.beforeEach(async ({ page }) => {
@@ -11,30 +11,30 @@ test.describe("Login - Admin", () => {
     await loginPage.goto("index.php/auth/login");
   })
   
-  test("Login successfully with valid Admin credentials", async ({ page }) => {
-    await loginPage.login(users.admin.username, users.admin.password);
-    await loginPage.verifyAdminLoginSuccess();
+  test("Login successfully with valid ESS credentials", async ({ page }) => {
+    await loginPage.login(users.ess.username, users.ess.password);
+    await loginPage.verifyESSLoginSuccess();
 
-    await loginPage.saveAdminStorage();
+    await loginPage.saveESSStorage();
   });
 
   test("Login fails with incorrect password", async ({ page }) => {
-    await loginPage.login(users.admin.username, users.admin.passwordWrong);
+    await loginPage.login(users.ess.username, users.ess.passwordWrong);
     await loginPage.verifyAlertErrorMessage(messages.login.invalidCredentials);
   });
 
   test("Login fails with incorrect username", async ({ page }) => {
-    await loginPage.login(users.admin.usernameWrong, users.admin.password);
+    await loginPage.login(users.ess.usernameWrong, users.ess.password);
     await loginPage.verifyAlertErrorMessage(messages.login.invalidCredentials);
   });
 
   test("Login fails when Username field is empty", async ({ page }) => {
-    await loginPage.login("", users.admin.password);
+    await loginPage.login("", users.ess.password);
     await loginPage.verifyErrorMessageUsername(messages.login.requiredField);
   });
 
   test("Login fails when Password field is empty", async ({ page }) => {
-    await loginPage.login(users.admin.username, "");
+    await loginPage.login(users.ess.username, "");
     await loginPage.verifyErrorMessagePassword(messages.login.requiredField);
   });
 
@@ -45,18 +45,18 @@ test.describe("Login - Admin", () => {
   });
 
   test("Login fails with both incorrect Username and Password", async ({ page }) => {
-    await loginPage.login(users.admin.usernameWrong, users.admin.passwordWrong);
+    await loginPage.login(users.ess.usernameWrong, users.ess.passwordWrong);
     await loginPage.verifyAlertErrorMessage(messages.login.invalidCredentials);
   });
 
   test("Enter username, then clear the field to leave it empty", async ({ page }) => {
-    await loginPage.fillUserName(users.admin.username);
+    await loginPage.fillUserName(users.ess.username);
     await loginPage.clearUserName();
     await loginPage.verifyErrorMessageUsername(messages.login.requiredField);
   })
 
   test("Enter password, then clear the field to leave it empty", async ({ page }) => {
-    await loginPage.fillPassword(users.admin.password);
+    await loginPage.fillPassword(users.ess.password);
     await loginPage.clearPassword();
     await loginPage.verifyErrorMessagePassword(messages.login.requiredField);
   })
