@@ -9,7 +9,7 @@ export class Header {
   }
 
   async clickUserDropdownButton() {
-    await this.page.click(selectors.header.userDropdownButton);
+    await this.page.locator(selectors.header.userDropdownButton).click();
   }
 
   async clickLogout() {

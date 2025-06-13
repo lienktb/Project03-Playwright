@@ -9,7 +9,7 @@ export default class LoginPage extends BasePage {
 
     async fillUserName(username: string) {
         await this.waitForSelector(selectors.loginPage.username);
-        await this.page.fill(selectors.loginPage.username, username);
+        await this.type(selectors.loginPage.username, username);
     }
 
     async clearUserName() {
@@ -17,7 +17,7 @@ export default class LoginPage extends BasePage {
     }
 
     async fillPassword(password: string) {
-        await this.page.fill(selectors.loginPage.password, password);
+        await this.type(selectors.loginPage.password, password);
     }
 
     async clearPassword() {
@@ -25,7 +25,7 @@ export default class LoginPage extends BasePage {
     }
 
     async clickLogin() {
-        await this.page.locator(selectors.loginPage.buttonLogin).click();
+        await this.click(selectors.loginPage.buttonLogin);
     }
 
     async login(username: string, password: string) {
