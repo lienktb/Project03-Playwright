@@ -4,3 +4,10 @@ export type Employee = {
   lastName: string;
   employeeId: string;
 };
+
+export type Account = {
+  username: string;
+  status: boolean;
+  password: string;
+  confirmPassword: string;
+};

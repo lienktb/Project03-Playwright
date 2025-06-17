@@ -3,7 +3,7 @@ import BasePage from "./BasePage";
 import { selectors } from "../untils/selectors";
 import { files } from "../data/files";
 import { contents } from "../data/contents";
-
+import { Employee, Account } from "../types/employee";
 export default class AddEmployeePage extends BasePage {
   constructor(page: Page) {
     super(page);
@@ -23,6 +23,26 @@ export default class AddEmployeePage extends BasePage {
 
   async fillEmployeeId(value: string) {
     await this.type(selectors.addEmployeePage.employeeId, value);
+  }
+
+  async fillUserName(value: string) {
+    await this.type(selectors.addEmployeePage.username, value);
+  }
+
+  async fillPassword(value: string) {
+    await this.type(selectors.addEmployeePage.password, value);
+  }
+
+  async fillConfirmPassword(value: string) {
+    await this.type(selectors.addEmployeePage.confirmPassword, value);
+  }
+
+  async chooseStatus(value: boolean) {
+    if (value) {
+      await this.click(selectors.addEmployeePage.enabledStatus);
+    } else {
+      await this.click(selectors.addEmployeePage.disabledStatus);
+    }
   }
 
   async updateFileAvatar(fileUrl: string) {
@@ -55,6 +75,24 @@ export default class AddEmployeePage extends BasePage {
     await this.clickSave();
   }
 
+  async clickCreateLogin() {
+    await this.click(selectors.addEmployeePage.buttonCreateLogin)
+  }
+
+  async createAccount(account: Account) {
+    await this.fillUserName(account.username);
+    await this.fillPassword(account.password);
+    await this.fillConfirmPassword(account.confirmPassword);
+    await this.chooseStatus(account.status);
+  }
+
+  async addEmployeeAndCreateLoginAccount(employee: Employee, account: Account) {
+    await this.fillFields(employee);
+    await this.clickCreateLogin();
+    await this.createAccount(account);
+    await this.clickSave();
+  }
+
   async verifyErrorMessageFile(expectedMessage: string) {
     await this.verifyErrorMessage(selectors.addEmployeePage.errorMessageFile, expectedMessage);
     await expect(this.page.locator(selectors.addEmployeePage.chooseFile)).toContainClass(selectors.addEmployeePage.chooseFileErrorClass);
@@ -66,9 +104,9 @@ export default class AddEmployeePage extends BasePage {
   }
 }
 
-type Employee = {
-  firstname: string;
-  middleName?: string;
-  lastName: string;
-  employeeId: string;
-};
+// type Employee = {
+//   firstname: string;
+//   middleName?: string;
+//   lastName: string;
+//   employeeId: string;
+// };

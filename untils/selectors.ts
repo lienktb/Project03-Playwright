@@ -52,7 +52,17 @@ export const selectors = {
         errorMessageMiddleName: "//input[@name='middleName']/ancestor::div[2]//span",
         errorMessageLastName: "//input[@name='lastName']/ancestor::div[2]//span",
         errorMessageEmployeeId: "//label[text()='Employee Id']//ancestor::div[2]//span",
-        errorMessageFile: "//input[@class='oxd-file-input']/ancestor::div[2]//span"
+        errorMessageFile: "//input[@class='oxd-file-input']/ancestor::div[2]//span",
+        username: "//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input",
+        password: "//label[text()='Password']/ancestor::div[contains(@class, 'oxd-input-group')]//input",
+        confirmPassword: "//label[text()='Confirm Password']/ancestor::div[contains(@class, 'oxd-input-group')]//input",
+        disabledStatus: "//label[contains(., 'Disabled')]",
+        enabledStatus: "//label[contains(., 'Enabled')]",
+        buttonCreateLogin: "//p[text()='Create Login Details']/ancestor::div[contains(@class, 'user-form-header')]//div",
+        errorMessageUsername: "//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//span",
+        errorMessagePassword: "//label[text()='Password']/ancestor::div[contains(@class, 'oxd-input-group')]//span",
+        errorMessageConfirmPassword: "//label[text()='Confirm Password']/ancestor::div[contains(@class, 'oxd-input-group')]//span",
+
     },
     editEmployeePage: {
         editContainer: ".orangehrm-edit-employee"

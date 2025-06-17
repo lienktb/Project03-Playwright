@@ -1,6 +1,10 @@
 export const messages = {
   basePage: {
     requiredField: 'Required',
+    passwordNotMatch: 'Passwords do not match',
+    passwordTooShort: 'Should have at least 7 characters',
+    passwordLowercase: "Your password must contain minimum 1 lower-case letter",
+    
   },
   login: {
     invalidCredentials: 'Invalid credentials',
