@@ -75,4 +75,13 @@ export default class LoginPage extends BasePage {
     async saveESSStorage() {
         await this.page.context().storageState({ path: 'storage/ess.json' });
     }
+    
+    async isValidSession () {
+        try {
+            await this.goto('index.php/dashboard/index');
+            return await this.page.locator(selectors.adminDashboardPage.dashboardGrid).isVisible({ timeout: 5000 });
+        } catch {
+            return false;
+      }
+    }
 };

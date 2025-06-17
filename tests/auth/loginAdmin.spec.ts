@@ -14,8 +14,6 @@ test.describe("Login - Admin", () => {
   test("Login successfully with valid Admin credentials", async ({ page }) => {
     await loginPage.login(users.admin.username, users.admin.password);
     await loginPage.verifyAdminLoginSuccess();
-
-    await loginPage.saveAdminStorage();
   });
 
   test("Login fails with incorrect password", async ({ page }) => {

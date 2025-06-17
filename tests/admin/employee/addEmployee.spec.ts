@@ -1,4 +1,4 @@
-import test from "@playwright/test";
+import { test } from "../../../fixtures/adminLoginFixture";
 import AddEmployeePage from "../../../pages/AddEmployeePage";
 import { Sidebar } from "../../../components/Sidebar";
 import { selectors } from "../../../untils/selectors";
@@ -11,10 +11,11 @@ let addEmployeePage: AddEmployeePage;
 let employeeListPage: EmployeeListPage;
 let sideBar: Sidebar;
 
-test.beforeEach(async ({ page }) => {
-  addEmployeePage = new AddEmployeePage(page);
-  employeeListPage = new EmployeeListPage(page);
-  sideBar = new Sidebar(page);
+test.beforeEach(async ({ loginAsAdminPage }) => {
+  addEmployeePage = new AddEmployeePage(loginAsAdminPage);
+  employeeListPage = new EmployeeListPage(loginAsAdminPage);
+  sideBar = new Sidebar(loginAsAdminPage);
+
   await employeeListPage.goto("index.php/dashboard/index");
   await sideBar.clickMenuItem(selectors.sidebar.menuPIM);
 });
@@ -54,12 +55,6 @@ test.describe("Add Employee - Valid Cases", () => {
     await addEmployeePage.addEmployeeWithoutAvatar(employeeData.noMiddleName);
     await addEmployeePage.verifyAddedEmployee();
   })
-})
-
-test.describe("Add Employee - Invalid Cases", () => {
-  test.beforeEach(async ({ page }) => {
-      await employeeListPage.clickButtonAdd();
-  })
 
   test("Add employee with a duplicate Employee ID", async ({ page }) => {
     await addEmployeePage.addEmployeeWithoutAvatar(employeeData.validEmployee);
@@ -69,6 +64,12 @@ test.describe("Add Employee - Invalid Cases", () => {
 
     await addEmployeePage.fillFields(employeeData.validEmployee);
     await addEmployeePage.verifyErrorMessage(selectors.addEmployeePage.errorMessageEmployeeId, messages.employee.employeeIdExist);
+  })
+})
+
+test.describe("Add Employee - Invalid Cases", () => {
+  test.beforeEach(async ({ page }) => {
+      await employeeListPage.clickButtonAdd();
   })
 
   test("Employee ID must be less than 10 characters", async ({ page }) => {

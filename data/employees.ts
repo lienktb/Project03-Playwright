@@ -17,9 +17,9 @@ export const employeeData = {
     employeeId: "1000"
   },
   noLastName: {
-    firstname: "",
+    firstname: "Ess",
     middleName: "O",
-    lastName: "Orange",
+    lastName: "",
     employeeId: "1000"
   },
   noEmployeeId: {

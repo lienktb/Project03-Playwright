@@ -47,7 +47,7 @@ export const selectors = {
         fileUpload: "input[type='file']",
         buttonSave: /Save/,
         chooseFile: ".oxd-file-div",
-        chooseFileError: ".oxd-file-div--error",
+        chooseFileErrorClass: "oxd-file-div--error",
         errorMessageFirstName: "//input[@name='firstName']/ancestor::div[2]//span",
         errorMessageMiddleName: "//input[@name='middleName']/ancestor::div[2]//span",
         errorMessageLastName: "//input[@name='lastName']/ancestor::div[2]//span",

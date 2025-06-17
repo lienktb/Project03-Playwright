@@ -57,7 +57,7 @@ export default class AddEmployeePage extends BasePage {
 
   async verifyErrorMessageFile(expectedMessage: string) {
     await this.verifyErrorMessage(selectors.addEmployeePage.errorMessageFile, expectedMessage);
-    await expect(this.page.locator(selectors.addEmployeePage.chooseFile)).toHaveClass(selectors.addEmployeePage.chooseFileError);
+    await expect(this.page.locator(selectors.addEmployeePage.chooseFile)).toContainClass(selectors.addEmployeePage.chooseFileErrorClass);
   }
 
   async verifyAddedEmployee() {
