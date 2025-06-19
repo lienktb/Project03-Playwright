@@ -1,13 +1,15 @@
 export type Employee = {
-  firstname: string;
+  firstName: string;
   middleName?: string;
   lastName: string;
   employeeId: string;
 };
 
 export type Account = {
+  role?: string,
   username: string;
-  status: boolean;
   password: string;
   confirmPassword: string;
+  status: boolean;
+  employeeName?: string;
 };

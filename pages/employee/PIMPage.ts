@@ -1,18 +1,28 @@
 import { expect, Page } from "@playwright/test";
-import BasePage from "./BasePage";
-import { selectors } from "../untils/selectors";
-import { contents } from "../data/contents";
+import BasePage from "../BasePage";
+import { selectors } from "../../untils/selectors";
+import { contents } from "../../data";
+import { Employee } from "../../types/employee";
+
 export default class EmployeeListPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
 
-  async clickButtonAdd() {
-    await this.click(selectors.addEmployeePage.buttonAdd);
+  async clickEmployeeList() {
+    await this.page.getByRole('link', { name: selectors.addEmployeePage.buttonEmployeeList }).click();
   }
 
   async findEmployeeById(id: string) {
     await this.type(selectors.employeeListPage.filterEmployeeId, id);
+    await this.clickSearch();
+    await this.waitForTableLoaded();
+  }
+
+  async findEmployeeByName(name: string) {
+    await this.type(selectors.employeeListPage.filterEmployeeName, name);
+    await this.clickSearch();
+    await this.waitForTableLoaded();
   }
 
   async clickSearch() {
@@ -35,7 +45,6 @@ export default class EmployeeListPage extends BasePage {
 
   async deleteEmployeeById(id: string) {
     await this.findEmployeeById(id);
-    await this.clickSearch();
     await this.waitForTableLoaded();
 
     const rowCount = await this.getRowCount();
@@ -54,11 +63,20 @@ export default class EmployeeListPage extends BasePage {
     await this.waitForTableLoaded();
     await expect(this.page.locator(selectors.employeeListPage.resultsText)).toHaveText(contents.basePage.noRecordFound);
     await expect(this.page.locator(selectors.basePage.tableBody)).toBeEmpty();
-}
+  }
+
+  async verifyEmployeeFound(employee: Employee) {
+    await this.waitForTableLoaded();
+    const employeeRow = this.page.locator(selectors.basePage.tableItem);
+    expect(await employeeRow.count()).toBeGreaterThanOrEqual(1);
+    const employeeCells = employeeRow.locator(selectors.basePage.tableCell);
+    await expect(employeeCells.nth(1)).toContainText(employee.employeeId);
+    await expect(employeeCells.nth(2)).toContainText(`${employee.firstName} ${employee.middleName}`);
+    await expect(employeeCells.nth(3)).toContainText(employee.lastName);
+  }
 
   async verifyEmployeeDeleted(id: string) {
     await this.findEmployeeById(id);
-    await this.clickSearch();
     
     await this.verifyNoRecordsFound();
   }

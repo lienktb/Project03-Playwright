@@ -4,8 +4,13 @@ export const selectors = {
         buttonDeleteConfirm: /Yes, Delete/,
         tableBody: ".oxd-table-body",
         tableItem: ".oxd-table-card",
+        tableCell: ".oxd-table-cell",
         tableLoader: ".oxd-table-loader",
-        tableDecoratorCard:".orangehrm-container"
+        tableDecoratorCard:".orangehrm-container",
+        buttonAdd: "//button[contains(., 'Add')]",
+        buttonSave: "Save",
+        searching: "Searching....",
+        noRecords: "No Records Found",
     },
     header: {
         userDropdownButton: ".oxd-userdropdown",
@@ -31,6 +36,7 @@ export const selectors = {
     employeeListPage: {
         employeeList: ".orangehrm-employee-list",
         filterEmployeeId: "//label[text()='Employee Id']//ancestor::div[2]//input",
+        filterEmployeeName: "//label[text()='Employee Name']//ancestor::div[2]//input",
         buttonEdit: "//div[@class='oxd-table-cell-actions']/button[1]",
         buttonDelete: "//div[@class='oxd-table-cell-actions']/button[2]",
         buttonSearch: /Search/,
@@ -38,14 +44,15 @@ export const selectors = {
         
     },
     addEmployeePage: {
-        buttonAddEmployee: /Add Employee/,
+        buttonAddEmployee: "Add Employee",
+        buttonEmployeeList: "Employee List",
         buttonAdd: "//button[contains(., 'Add')]",
         firstName: ".orangehrm-firstname",
         middleName: ".orangehrm-middlename",
         lastName: ".orangehrm-lastname",
         employeeId: "//label[text()='Employee Id']/ancestor::div[contains(@class, 'oxd-input-group')]//input",
         fileUpload: "input[type='file']",
-        buttonSave: /Save/,
+       
         chooseFile: ".oxd-file-div",
         chooseFileErrorClass: "oxd-file-div--error",
         errorMessageFirstName: "//input[@name='firstName']/ancestor::div[2]//span",
@@ -62,9 +69,26 @@ export const selectors = {
         errorMessageUsername: "//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//span",
         errorMessagePassword: "//label[text()='Password']/ancestor::div[contains(@class, 'oxd-input-group')]//span",
         errorMessageConfirmPassword: "//label[text()='Confirm Password']/ancestor::div[contains(@class, 'oxd-input-group')]//span",
-
     },
     editEmployeePage: {
         editContainer: ".orangehrm-edit-employee"
+    },
+    addUserPage: {
+        username: "//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input",
+        password: "//label[text()='Password']/ancestor::div[contains(@class, 'oxd-input-group')]//input",
+        confirmPassword: "//label[text()='Confirm Password']/ancestor::div[contains(@class, 'oxd-input-group')]//input",
+        selectStatus: "//label[contains(.,'Status')]/parent::div/following-sibling::div",
+        enabledStatus: "//label[contains(.,'Status')]/parent::div/following-sibling::div//div[contains(.,'Enabled') and @class='oxd-select-option']",
+        disabledStatus: "//label[contains(.,'Status')]/parent::div/following-sibling::div//div[contains(.,'Disabled') and @class='oxd-select-option']",
+        userRole: "User Role",
+        status: "Status",
+        enabled: "Enabled",
+        disabled: "Disabled",
+        searching: "Searching....",
+        noRecords: "No Records Found",
+        employeeName: "Employee Name",
+        selectRole: "//label[contains(.,'User Role')]/parent::div/following-sibling::div",
+        role: "//label[contains(.,'User Role')]/parent::div/following-sibling::div//div[contains(.,'%s') and @class='oxd-select-option']",
+        ESSRole: "//label[contains(.,'User Role')]/parent::div/following-sibling::div//div[contains(.,'ESS') and @class='oxd-select-option']",
     }
 }

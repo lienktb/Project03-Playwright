@@ -1,5 +1,5 @@
 import { test } from "../../../fixtures/roleFixture";
-import EmployeeListPage from "../../../pages/EmployeeListPage";
+import EmployeeListPage from "../../../pages/employee/PIMPage";
 import { employeeData } from "../../../data/employees";
 import { Sidebar } from "../../../components/Sidebar";
 import { selectors } from "../../../untils/selectors";
